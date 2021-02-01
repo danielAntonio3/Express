@@ -32,8 +32,13 @@ app.get('/',(req,res)=>{
     res.send('Hello world');
 })
 
+app.get('/about',(req,res) =>{
+    res.send("About me");
+})
+
 // ? INICIAR EXPRESS
 app.listen(3000,()=>{
     console.log('server listening on port 3000');
 });
+
 
