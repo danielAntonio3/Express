@@ -22,4 +22,18 @@ server.listen(3000, () => {
 // ! REQUIERE UN MODULO
 const express = require('express');
 
+// ! COMO SE INICIA UN SERVIDOR BASICO
+// ! INICIAMOS EL SERVICIO
+// ? APP ES NUESTRO SERVIDOR
+const app = express();
+
+// ? DEVOLVER UNA PETICIÓN
+app.get('/',(req,res)=>{
+    res.send('Hello world');
+})
+
+// ? INICIAR EXPRESS
+app.listen(3000,()=>{
+    console.log('server listening on port 3000');
+});
 
