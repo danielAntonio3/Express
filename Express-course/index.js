@@ -31,14 +31,22 @@ const express = require('express');
 const app = express();
 
 //* MIDDLEWARE
-
+/*
 function logger(req, res, next) {
  console.log('Request received of middleware');
  next();
+}*/
+
+// ? PARA SABER LA RUTA DE LA PETICION
+function logger(req, res, next){
+    console.log(`Router received: ${req.protocol}://${req.get('host')}${req.originalUrl}`);
+    next();
 }
+
+
 // *-------------------------------------------------------------------------------------------------------------------
 
-// ! PARA DECIRLE A EXPRESS QUE ENTIENDA CODIGO JSON
+// ! PARA DECIRLE A EXPRESS QUE ENTIENDA CÓDIGO JSON
 app.use(express.json());
 app.use(logger);
 
