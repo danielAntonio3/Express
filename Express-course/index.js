@@ -33,8 +33,13 @@ const app = express();
 // ? PARA SABER LA RUTA DE LA URL MORGAN ES UN PAQUETE INSTALADO
 const morgan = require('morgan');
 
-// * SETTINGS
+// * SETTINGS ( CONFIGURACIONES)
+// ? MOSTRAR EL NOMBRE DEL SERVICIO QUE LE DAMOS
+// ! NOMBRE DE LA VARIABLE Y EL CONTENIDO
+app.set('AppName','TUTORIAL DE EXPRESS');
+app.set('port',3000);
 
+app.set('view engine','ejs');
 // *-------------------------------------------------------------------------------------------------------------------
 
 //* MIDDLEWARE
@@ -70,6 +75,14 @@ app.use(morgan('dev'));
 });*/
 
 // * ROUTES
+
+app.get('/',(req,res) => {
+    const data = [{name: 'Daniel'},{name: 'Renato'},{name: 'Natalia'}];
+
+    res.render('index.ejs',{personas: data});
+});
+
+
 // ? RUTA CON GET
 app.get('/user',(req,res)=>{
     // ? ENVIAR TEXTO
@@ -120,8 +133,12 @@ app.use(express.static('public'));
 
 // ! DECLARAMOS EL PUERTO DONDE SE EJECUTARA EL SERVIDOR
 // ? INICIAR EXPRESS
-app.listen(3000,()=>{
-    console.log('server listening on port 3000');
+app.listen(app.set("port"),()=>{
+
+    // ? MUESTRA EL NOMBRE QUE COLOCAMOS EN LOS SETTINGS
+    console.log(app.get('AppName'));
+
+    console.log(`server listening on port ${app.set("port")}`);
 });
 
 
