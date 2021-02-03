@@ -30,8 +30,12 @@ const express = require('express');
 // ? APP ES NUESTRO SERVIDOR
 const app = express();
 
-// ? PARA SABER LA RUTA DE LA URL
+// ? PARA SABER LA RUTA DE LA URL MORGAN ES UN PAQUETE INSTALADO
 const morgan = require('morgan');
+
+// * SETTINGS
+
+// *-------------------------------------------------------------------------------------------------------------------
 
 //* MIDDLEWARE
 /*
@@ -47,14 +51,15 @@ function logger(req, res, next){
     next();
 }*/
 
+// ! PARA EJECUTAR EL MIDDLEWARE
+//app.use(logger);
 
 // *-------------------------------------------------------------------------------------------------------------------
 
 // ! PARA DECIRLE A EXPRESS QUE ENTIENDA CÓDIGO JSON
 app.use(express.json());
 
-// ! PARA EJECUTAR EL MIDDLEWARE
-//app.use(logger);
+
 // ! MIDDLEWARE QUE IMPRIME EN CONSOLA LA RUTA DE LA PETICION
 app.use(morgan('dev'));
 
@@ -64,7 +69,7 @@ app.use(morgan('dev'));
     next();
 });*/
 
-
+// * ROUTES
 // ? RUTA CON GET
 app.get('/user',(req,res)=>{
     // ? ENVIAR TEXTO
@@ -105,8 +110,15 @@ app.put('/user/:id',(req,res) =>{
 app.delete('/user/:id',(req,res) =>{
     res.send(`User: ${req.params.id} Eliminado`);
 });
+// *-------------------------------------------------------------------------------------------------------------------
 
+// * STATIC FILES
+// ! ES PARA MOSTRAR CONTENIDO HTML Y EN EL PUEDE EJECUTAR COSAS DE CSS Y JS
+app.use(express.static('public'));
 
+// *-------------------------------------------------------------------------------------------------------------------
+
+// ! DECLARAMOS EL PUERTO DONDE SE EJECUTARA EL SERVIDOR
 // ? INICIAR EXPRESS
 app.listen(3000,()=>{
     console.log('server listening on port 3000');
