@@ -30,6 +30,9 @@ const express = require('express');
 // ? APP ES NUESTRO SERVIDOR
 const app = express();
 
+// ? PARA SABER LA RUTA DE LA URL
+const morgan = require('morgan');
+
 //* MIDDLEWARE
 /*
 function logger(req, res, next) {
@@ -38,19 +41,24 @@ function logger(req, res, next) {
 }*/
 
 // ? PARA SABER LA RUTA DE LA PETICION
+/*
 function logger(req, res, next){
     console.log(`Router received: ${req.protocol}://${req.get('host')}${req.originalUrl}`);
     next();
-}
+}*/
 
 
 // *-------------------------------------------------------------------------------------------------------------------
 
 // ! PARA DECIRLE A EXPRESS QUE ENTIENDA CÓDIGO JSON
 app.use(express.json());
-app.use(logger);
 
-// ! PARA INDICAR QUE PASO POR AQUI DE UNA RUTA
+// ! PARA EJECUTAR EL MIDDLEWARE
+//app.use(logger);
+// ! MIDDLEWARE QUE IMPRIME EN CONSOLA LA RUTA DE LA PETICION
+app.use(morgan('dev'));
+
+// ! PARA INDICAR QUE PASO POR AQUÍ DE UNA RUTA
 /*app.all('/user',(req,res,next)=>{
     console.log('Por aqui paso');
     next();
